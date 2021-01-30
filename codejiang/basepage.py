@@ -34,15 +34,20 @@ class Base:
     def find(self, locator, value):
         return self.driver.find_element(locator, value)
 
-    def url(self,url):
+    def url(self, url):
         return self.driver.get(url)
 
-    def js(self,js):
+    def js(self, js):
         return self.driver.execute_script(js)
 
-    def wait_time(self,location,time=10):
-        return WebDriverWait(self.driver,time).until(expected_conditions.invisibility_of_element(location))
+    def wait_time(self, location, time=10):
+        return WebDriverWait(self.driver, time).until(expected_conditions.invisibility_of_element(location))
 
+    # def handle(self):
+    #     print(self.driver.window_handles())
+    #     return self.driver.window_handles[-1]
 
+    def swith(self,n):
+        self.driver.switch_to.window(self.driver.window_handles[n])
 
 

@@ -19,4 +19,4 @@ class Shouye(Base):
         self.find(By.XPATH,'//*[@class="menu-span"]/li[6]/div').click()
         sleep(5)
         self.find(By.XPATH,'//*[@class ="menu-span"]/li[6]//li[1]').click()
-        return GongGao()
+        return GongGao(self.driver)

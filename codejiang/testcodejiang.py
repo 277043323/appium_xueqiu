@@ -11,7 +11,7 @@ class Test:
         self.main = Main()
 
     def test(self):
-        self.main.goto_shouye().shouye()
+        self.main.goto_shouye().shouye().gonggao()
 
 
 
