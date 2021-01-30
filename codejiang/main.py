@@ -21,11 +21,11 @@ class Main(Base):
         # return Shouye()
         self.url("https://tea.codejiang.com/login")
         time.sleep(5)
-        self.find(By.XPATH, '//*[@id="app"]/section/div/main/div/form/div[1]/div/div[1]/input').send_keys(Datas.data(self)[0])
-        # self.find(By.XPATH, '//*[@id="app"]/section/div/main/div/form/div[1]/div/div[1]/input').send_keys('guohongxia')
-        self.find(By.XPATH,'//*[@id="app"]/section/div/main/div/form/div[2]/div/div[1]/input').send_keys(Datas.data(self)[1])
+        # self.find(By.XPATH, '//*[@id="app"]/section/div/main/div/form/div[1]/div/div[1]/input').send_keys(Datas.data(self)[0])
+        self.find(By.XPATH, '//*[@id="app"]/section/div/main/div/form/div[1]/div/div[1]/input').send_keys('guohongxia')
+        self.find(By.XPATH,'//*[@id="app"]/section/div/main/div/form/div[2]/div/div[1]/input').send_keys('000111')
         self.find(By.XPATH, '//*[@id="app"]/section/div/main/div/form/div[3]/div/div[1]').click()
-        return Shouye(self)
+        return Shouye(self.driver)
 
 
 

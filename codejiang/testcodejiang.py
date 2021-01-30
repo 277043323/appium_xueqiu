@@ -7,9 +7,11 @@ import pytest
 
 
 class Test:
+    def setup(self):
+        self.main = Main()
+
     def test(self):
-        main = Main()
-        main.goto_shouye().shouye()
+        self.main.goto_shouye().shouye()
 
 
 
