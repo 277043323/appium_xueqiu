@@ -50,4 +50,8 @@ class Base:
     def swith(self,n):
         self.driver.switch_to.window(self.driver.window_handles[n])
 
+    def forward(self):
+        return self.driver.forward()
+
+
 
