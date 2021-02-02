@@ -1,2 +1,11 @@
+
 username: "guohongxia"
 passwd: "000111"
+url: "https://tea.codejiang.com/login"
+CSS_SELECTOR:
+  - .el-form>div:nth-child(1) input
+  - .el-form>div:nth-child(2) input
+parmas:
+ceshibuz:
+qiwangzhi:
+
