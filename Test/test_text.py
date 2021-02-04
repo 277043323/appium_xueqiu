@@ -49,14 +49,16 @@
 # #匿名函数，对一些简单的语句进行封装
 # y = lambda x:x*2
 # print(y(2))
-m = lambda x,y,z:x+y+z
-print(m(2,3,4))
+# m = lambda x,y,z:x+y+z
+# print(m(2,3,4))
 #列表按照绝对值的大小进行正序排列
 # m=[1,3,-4,-6,5,-2]
 # # print(sorted(list, key=lambda x:abs(x)))
 # print(m.sort())
 # print(m)
-from time import sleep, ctime
+from datetime import datetime
+from functools import wraps
+from time import sleep, ctime, time
 import mock
 
 # Filename : test.py
@@ -240,17 +242,18 @@ import json
 # #dump,load这个是对文件进行操作
 # #把json格式的数据，已字符串的形式写入文件中
 # print(type(json.dump(d, open("haha", 'w'))))
-L=["guohongxia",1,"nihao","haha"]
-print(json.dump(L,open("haha",'w')))
-t ="[11,22,33]"
-print(json.loads(t))
-m=json.loads(t)
-print(type(json.loads(t)))
-#把文件中的字符串已json格式的数据读出来
-print(json.load(open("haha"),object_hook=None))
+# L=["guohongxia",1,"nihao","haha"]
+# print(json.dump(L,open("haha",'w')))
+# t ="[11,22,33]"
+# print(json.loads(t))
+# m=json.loads(t)
+# print(type(json.loads(t)))
+# #把文件中的字符串已json格式的数据读出来
+# print(json.load(open("haha"),object_hook=None))
 #笔记：对文件的操作一般就是写和读,json库对json格式进行输入输出的操作，dumps是把json格式的数据转化字符格式
 #loads是把字符格式的数据已json格式输出
 #
+#捕获异常信息
 # def main(a,b):
 #
 #     try:
@@ -304,30 +307,30 @@ print(json.load(open("haha"),object_hook=None))
 
 #写一个二分法查找的的程序题，查找一个值再一个列表中，若再就返回true，不在就返回false
 
-
-def main(n, N):
-    middle = len(N)//2
-    if N[middle] > n:
-        return main(n, N[:middle+1])
-    elif N[middle] < n:
-        return main(n, N[middle:])
-    else:
-        return n
-
-
-if __name__ == '__main__':
-    print(type(main(3, [1, 2, 3, 4, 5, 6, 7, 8, 9])))
-    print(main(3, [1, 2, 3, 4, 5, 6, 7, 8, 9]))
-
 #
-# name='guo,hong,xia'
-# print(name.split(',')[:1])
-
-#迭代
-#给多个数进行排序
-import os
-
-print(os.getcwd())
+# def main(n, N):
+#     middle = len(N)//2
+#     if N[middle] > n:
+#         return main(n, N[:middle+1])
+#     elif N[middle] < n:
+#         return main(n, N[middle:])
+#     else:
+#         return n
+#
+#
+# if __name__ == '__main__':
+#     print(type(main(3, [1, 2, 3, 4, 5, 6, 7, 8, 9])))
+#     print(main(3, [1, 2, 3, 4, 5, 6, 7, 8, 9]))
+#
+# #
+# # name='guo,hong,xia'
+# # print(name.split(',')[:1])
+#
+# #迭代
+# #给多个数进行排序
+# import os
+#
+# print(os.getcwd())
 
 #方法一：
 # def main():
@@ -341,21 +344,21 @@ print(os.getcwd())
 # if __name__ == '__main__':
 #     print(main())
 #方法二：
+# #
+# def main(elem):
+#     return elem[0]
 #
-def main(elem):
-    return elem[0]
-
-list = ["我", "我们", "你"]
-e = "".join(list)
-print(type(e))
-print(e)
-print(type(list))
-list.sort(key=main)
-print(list[-1])
-print(list)
-print(e.split("我"))
-h = "-".join(e)
-print(h)
+# list = ["我", "我们", "你"]
+# e = "".join(list)
+# print(type(e))
+# print(e)
+# print(type(list))
+# list.sort(key=main)
+# print(list[-1])
+# print(list)
+# print(e.split("我"))
+# h = "-".join(e)
+# print(h)
 #key -- 主要是用来进行比较的元素，只有一个参数，具体的函数的参数就是取自于可迭代对象中，指定可迭代对象中的一个元素来进行排序。
 
 
@@ -409,12 +412,12 @@ print(h)
 # print(L)
 
 #python 实现字符串替换
-a ="hello world"
-print(a.replace("hello", "world"))
-#比较两个字符并把相同的提取出来,这里考虑用到正则表达式,用列表推导式来得出结论
-b="abcdlk"
-c="abclf"
-# n= set(c)
+# a ="hello world"
+# print(a.replace("hello", "world"))
+# #比较两个字符并把相同的提取出来,这里考虑用到正则表达式,用列表推导式来得出结论
+# b="abcdlk"
+# c="abclf"
+# # n= set(c)
 # m=set(b)
 # print(n.intersection(m))
 # l=n.intersection(m)
@@ -431,31 +434,259 @@ import re
 #多进程间的通信？
 # set={1,3}
 # set.intersection()
-import logging
-logging.basicConfig(level=logging.INFO)
+# import logging
+# logging.basicConfig(level=logging.INFO)
+#
+# def loop():
+#     logging.info("start loop at"+ctime())
+#     sleep(2)
+#
+#
+# if __name__ == '__main__':
+#     loop()
+#
+# set={11,22,33,44,55}
+# str ="asdfg"
+# list =[123456]
+#
+# t = list[1:3:1]
+# print(t)
+#
+# y = str[::2]
+# print(y)
 
-def loop():
-    logging.info("start loop at"+ctime())
-    sleep(2)
+mol =lambda x:x.sort()
+L=[1, 4, 2, 3]
+print(mol(L))
+print(L)
+#使用匿名函数输出x的y次方
+#笔记匿名函数和其他函数相比是有返回值的，不需要用命令return
+# f =lambda x,y:x**y
+# print(f(2,3))
+#
+# def main(n,x):
+#     s=1
+#     while n>0:
+#         s=x*s
+#         n-=1
+#     return s
+#
+#
+# print(main(3, 2))
+
+# print(bool(None))
+
+#笔记：if条件语句后面跟的是一个bool类型的条件，这个是前提若条件返回的是TRUE则条件成立，否则条件不成立。数字系统会默认的返回一个TRUE,0系统会返回FLASE,
+#非空的字符串返回的都是TRUE,为空时返回的是FALSE.
+
+#for和while都可以有else语句。那么是不是说else关键词是独立的，不是和某个符号相连的。
+#迭代输出序列时（如：列表）使用 for 比 while 更好？为什么要更好呢。
+
+#闭包，和面向对象的区别。闭包占用空间小，面向对象占用空间会比较大。闭包实现的功能简单
+
+#
+# def lin_6(k,b):
+#     def create_y(x):
+#         print(k*x+b)
+#     return create_y
+#
+#
+# lin_6_1 = lin_6(1,2)
+# lin_6_1(0)
+# lin_6_1(1)
+# #
+# class test:
+#     def main(self):
+#         return ""
+
+#函数，闭包，对象，匿名函数
+#对象：能够完成最为复杂的功能，传递是很多数据+功能
+#函数：能够完成较为复杂的功能，传递的是这个函数的引用，只有功能。可以把特定功能的代码封装到一个程序内，只传递代码的功能不传递数据
+#匿名函数，能够完成简单的功能，传递这个函数的引用只传递功能。当作实参传递很方便，也是封装代码，但是这个只能对功能简单的代码进行封装。
+#闭包，能够实现较为复杂的功能，传递这个函数的引用传递的是这个闭包中的函数以及数据，可以给代码，还可以传给代码所需要的数据
 
 
-if __name__ == '__main__':
-    loop()
+# def test1():
+#     x=100
+#     def test2():
+#         #用于修改闭包外面的参数此时一定要加nonlocal，或者会报错
+#         nonlocal x
+#         print("test2-----x=%d" % x)
+#         x=200
+#         print("test2-----x=%d" % x)
+#
+#     return test2
+#
+# t =test1()
+# print(t())
 
-set={11,22,33,44,55}
-str ="asdfg"
-list =[123456]
+# def html(a,b):
+#     n=a+b
+#     def main():
+#         print("我来尝试着写一下闭包---n=%d"% n)
+#     return main
+#
+# t=html(4,9)
+#
+# print(t())
+#
+# def index(a,b):
+#     return a+b
+#
+# t = index(2,3)
+# print(t)
+#
+#
+# class test002:
+#     def test003(self,a,b):
+#         return a+b
+#
+# #创建一个对象，对象中有很多的方法，这样程序在执行的时候就会很消耗内存，不过这对象的引用可以实现很强大的功能。
+# t  =test002()
+# print(t.test003(2, 4))
+#
+# #闭包函数的几个要点：1.闭包是一个函数，里面在嵌套一个函数；2.闭包返回的是嵌套函数的引用（函数后面不能加小括号），3.闭包内嵌的函数可以使用外面函数的数据，4.传递闭包的引用就是传递内嵌函数的功能和函数所需的数据
+#
+# #1.闭包和装饰器之间的异同,难道装饰器的不同就是因为装饰器传递的数据是一个函数的引用
+#
+# #这个就是给某个函数添加权限的方式之一，写一个闭包作为装饰器
+# #用装饰器实现函数的执行时间
+# def w1(f1):
+#
+#     def inner(*args,**kwargs):
+#         start = time()
+#         print("----这是权限验证1--")
+#         print("----权限验证2----")
+#         #这里是对实参进行拆包，一般我们在调用一个函数的时候就应该考虑到要不要给函数传递参数
+#         return f1(*args,**kwargs)
+#     return inner
+# #这种显示是使用了python的语法糖
+# @w1  #等价于 f1=w1(f1)
+# def f1():
+#     print(1)
+# f1()
+#
+# #也可以这样写。
+# f1 = w1(f1)
+# print(f1())
+#
+#
+# @w1
+# def f2(num):
+#     pass
+#
+# @w1
+# def f3(num,**kwargs):
+#     print("打印数值",kwargs)
+#
+# #根据函数，都要重新修改装饰器吗？如何设计一个可以装饰任何函数的装饰器呢。有呢直接把参数不定长参数就可以了
+# #带有返回值的参数，怎么实现装饰器呢？在函数前面加个return关键词就可以变成一个通用的装饰器了。可以对各中函数进行装饰
+#
+# @w1
+# def f4(num):
+#     print("hahhh")
+#     return 'ok'
+#
+#
+# #多个装饰器对同一个函数装饰,这样的话就会先用下面的装饰器装在用上面的装饰器装。先执行上面的装饰器，在执行下面的装饰器。
+# def w2(func):
+#     def f2(*args,**kwargs):
+#         print("装饰器er")
+#         return func(*args,**kwargs)
+#     return f2
+#
+# @w2   #相当于f5 = w2(f5)
+# @w1
+# def f5(num):
+#     print()
+#
+#
+# def w3(func):
+#     def main(*args,**kwargs):
+#         a=args[0]
+#         b=args[1]
+#         if a>b:
+#             print("---权限验证-----")
+#         else:
+#             print("----权限验证2----")
+#         return func(*args,**kwargs)
+#     return main
+#
+#
+# #装饰器中套装饰器，为什么用这种方式呢？
+#
+# @w3
+# def log(a, b):
+#     return a+b
+#
+# @w3(1)  #调用w3并且把1当作实参进行传递；然后把返回值当作装饰器对log进行装饰
+# def log(a, b):
+#     return a//b
+#
+#
+# def logger(param):
+#     def wrap(function):
+#         """logger wrapper"""
+#         @wraps(function)   #带有参数的装饰器,wraps是functools类中的一个闭包
+#         def _wrap(*args,**kwargs):
+#
+#             print("这是一个日志文件")
+#             print("这是一个日志文件")
+#             return function(*args,**kwargs)
+#         return _wrap
+#     return wrap
 
-t = list[1:3:1]
-print(t)
 
-y = str[::2]
-print(y)
+#下面就是一个带有参数的装饰器的实现过程
+def set_level(params):
+    def level(funct):
+        def set_funct(*args,**kwargs):
+            if params ==1:
+                print("权限验证1")
+            elif params == 2:
+                print("权限验证2")
+            return funct(*args,**kwargs)
+        return set_funct
+    return level
 
 
+@set_level(1)
+def test1():
+    print("这是权限验证1的用户")
+
+test1()
+
+@set_level(2)
+def test2():
+    print("这是权限验证2的用户")
+
+test2()
+
+#要对新来的用户设置调用函数的的权限。即实现用户1调用test1()函数执行的结果和用户2调用test1()函数执行的结果不一样。
+#设计的时候要考虑到开放封闭原则，开方即可以对方式进行扩展，封闭为不能修改函数。
+#想到了设计带有参数的装饰器。
 
 
+def set_warp(params):
+    def warp(func):
+        def _warp(*args, **kwargs):
+            if params>1:
+                print("我是管理员")
+            return func(*args,**kwargs)
+        return _warp
+    return warp
 
+
+@set_warp(2)
+def test3():
+    return "是我，我是管理员用户"
+
+
+#笔记：
+#1.闭包，可以称之为一个特殊的函数，它与普通函数而言有一个更封闭的空间；它的书写格式是函数里面内套函数，外层函数返回的是内层函数的引用。实际执行的是内部函数代码，内层函数可以调用外层函数的数据。(这个数据可以是函数，int等等)
+#闭包的特性,与普通函数相比，它既可以传递一段程序也可以传递数据。普通函数可以说只能传递一段程序
+#装饰器，的实现原理就是使用了闭包。对函数进行装饰的闭包就叫装饰器，此时闭包传递的是参数是一个方法。装饰器，可对带参的函数，不带参的，有返回值的，和没有函数值的函数进行装饰，这个可以使用一个通用的装饰器完成
+#装饰器，也有待参数的装饰器和不带参数的装饰器，他们的执行有点不一样，带参的是：先把参数作为实参传进行传递，然后把返回值作为装饰器对函数进行装饰
 
 
 
