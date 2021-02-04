@@ -660,7 +660,8 @@ test1()
 def test2():
     print("这是权限验证2的用户")
 
-test2()
+
+print(test2.__name__)
 
 #要对新来的用户设置调用函数的的权限。即实现用户1调用test1()函数执行的结果和用户2调用test1()函数执行的结果不一样。
 #设计的时候要考虑到开放封闭原则，开方即可以对方式进行扩展，封闭为不能修改函数。
@@ -669,6 +670,7 @@ test2()
 
 def set_warp(params):
     def warp(func):
+        @wraps(func)    #@wraps(f):这个不仅仅是名字更改，注意：@wraps接受一个函数来进行装饰，并加入了复制函数名称、注释文档、参数列表等等的功能。这可以让我们在装饰器里面访问在装饰之前的函数的属性。
         def _warp(*args, **kwargs):
             if params>1:
                 print("我是管理员")
@@ -682,12 +684,39 @@ def test3():
     return "是我，我是管理员用户"
 
 
+print(set_warp(2).__name__)
+print(test3.__name__)   #此时输出了是名字是_warp，并不是test3。这个要怎么解决呢，就用到了functools.warps方法。我们只需要添加一下这个代码就可以了，如上
 #笔记：
 #1.闭包，可以称之为一个特殊的函数，它与普通函数而言有一个更封闭的空间；它的书写格式是函数里面内套函数，外层函数返回的是内层函数的引用。实际执行的是内部函数代码，内层函数可以调用外层函数的数据。(这个数据可以是函数，int等等)
 #闭包的特性,与普通函数相比，它既可以传递一段程序也可以传递数据。普通函数可以说只能传递一段程序
 #装饰器，的实现原理就是使用了闭包。对函数进行装饰的闭包就叫装饰器，此时闭包传递的是参数是一个方法。装饰器，可对带参的函数，不带参的，有返回值的，和没有函数值的函数进行装饰，这个可以使用一个通用的装饰器完成
 #装饰器，也有待参数的装饰器和不带参数的装饰器，他们的执行有点不一样，带参的是：先把参数作为实参传进行传递，然后把返回值作为装饰器对函数进行装饰
+#装饰器就是对一个函数进行修改功能的函数，其实现原理就是闭包的原因
+
+"""需求写一个通用的打印日志的装饰器"""
 
 
+def log(params):
+    def loggit(func):
+        @wraps(func)       #@wraps接受一个函数来进行装饰，并加入了复制函数名称、注释文档、参数列表等等的功能。这可以让我们在装饰器里面访问在装饰之前的函数的属性。
+        def wrap(*args,**kwargs):
+            print("当前是：{}".format(params))
+            with open(LOG,"a") as file:
+                file.write("我是日志信息")
+            print("当前的用户名：{}".format(args[0]))
+            print("当前的密码是：{}".format(args[1]))
+            return func(*args,**kwargs)
+        return wrap
+    return loggit
 
+
+LOG = 'E:\\Ghx_Work_Project\\appium_xueqiu\\Test\\logtxt'
+@log("登陆模块的日志")   ##调用log并且把"登陆模块的日志"当作实参进行传递；然后把返回值当作装饰器对logger进行装饰.所以我们只需要在装饰器外套一个带参数的函数，并返回装饰器的名称即可。
+def logger(username,password):
+    print("当前的日志为。。。。")
+    t = open(LOG,"r")
+    print(t.read())
+
+
+print(logger("guohongxia","000111"))
 
