@@ -40,8 +40,14 @@ class Base:
     def js(self, js):
         return self.driver.execute_script(js)
 
-    def wait_time(self, location, time=10):
+    #这里封装一个显示等待的函数
+    def wait_time(self, location, time):
         return WebDriverWait(self.driver, time).until(expected_conditions.invisibility_of_element(location))
+
+    #显示等待这里也可以不用expected_conditions这个类，我们可以自己定义一个函数,下面我们定义一个匿名函数，实现的是和上面一样的
+    def wait(self,location,time):
+        return WebDriverWait(self.driver,time).until(lambda x:x.find_element(location))
+
 
     # def handle(self):
     #     print(self.driver.window_handles())

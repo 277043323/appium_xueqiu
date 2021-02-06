@@ -9,9 +9,11 @@ import pytest
 @allure.testcase("http://bug.aiiage.com:12345/zentao/testcase-view-2212-1.html")
 @allure.feature("百度搜索")
 class Test:
+
     def setup(self):
         self.driver = selenium.webdriver.Chrome()
 
+    @allure.issue("https://www.tapd.cn/21607901/bugtrace/bugs/view/1121607901001002281")
     def test(self):
         with allure.step("打开百度"):
             self.driver.get("https://www.baidu.com")
@@ -28,6 +30,5 @@ class Test:
             self.driver.quit()
 
 
-# if __name__ == '__main__':
-#
-#     Test().main()
+if __name__ == '__main__':
+    Test().main()

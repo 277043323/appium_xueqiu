@@ -10,9 +10,10 @@ import allure
 class GongGao(Base):
     @allure.story("新增公告成功")
     def gonggao(self):
-        sleep(5)
+        locator = (By.XPATH,'//*[@class="table-top"]/button')
+        self.wait_time(locator)
         self.find(By.XPATH,'//*[@class="table-top"]/button').click()
-        sleep(3)
+        # sleep(3)  #这里使用强制等待，等待3s
         # self.find(By.XPATH,'//*[@class="el-form demo-ruleForm"]/div[1]/input').send_keys("新增公告1")
         with allure.step("点击公告标题"):
             self.find(By.CSS_SELECTOR, '.el-form>div:nth-child(1) input').send_keys("新增公告1")

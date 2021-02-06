@@ -150,14 +150,14 @@ import re
 #     email = input("请输入你的邮箱地址：")
 #     ret = re.match(r"([a-zA-Z_0-9]{4,20})@(163|126|qq)\.com$", email)
 #     if ret:
-#         print("邮箱符合要求:%s" % ret.group(1))
+#         print("邮箱符合要求:%s" % ret.group(2))
 #     else:
 #         print("邮箱不符合要求:%s" % email)
 #
 #
 # if __name__ == '__main__':
 #     main()
-#
+
 # html_url ="<h1>hhhjhkjhkj</h1>"
 #
 # ret = re.match(r"<[h][0-9]*>.*</[h][0-9]*>",html_url)
@@ -186,19 +186,19 @@ name =' <img alt="" src="/images/476/45af839c6c7362a3ec89ca7f7e6ca53c.png"> '
 
 #1.匹配以字母A开头的单词
 
-name = "i am very fine"
-ret = re.split(r" ",name)
-n= str(ret)
-print(n)
-for i in ret:
-    # print(i)
-    ret1 = re.match(r"a.+",i)
-    if ret1:
-        print("这是包含a的单词：%s" % i )
-    else:
-        print("不包含a的单词：%s" % i)
-ret1 = re.search(r"\ba.*\b",name)
-print(ret.group())
+# name = "i am very fine"
+# ret = re.split(r" ",name)
+# n= str(ret)
+# print(n)
+# for i in ret:
+#     # print(i)
+#     ret1 = re.match(r"a.+",i)
+#     if ret1:
+#         print("这是包含a的单词：%s" % i )
+#     else:
+#         print("不包含a的单词：%s" % i)
+# ret1 = re.search(r"\ba.*\b",name)
+# print(ret.group())
 
 # #匹配刚好6个字符的单词
 # name = ["sssdwef","sdas","s","s32345","shkja！","AsssJs"]
@@ -216,5 +216,17 @@ print(ret.group())
 # ret = re.match(r"\d+","123124")
 # print(ret.group())
 
+
+#写一段判断邮箱是否符合规范的程序
+#这里要注意findall返回的是一个列表。我想获取一个分组就需先拿数据出来，然后或取一个分组
+# def main():
+#     email = input("请输入你的邮箱地址：")
+#     ret = re.findall('(^[1-9a-zA-Z_][1-9a-zA-Z_]*)@(qq|126|136)\.(com)',email)
+#     print(ret[0][1])
+#     return main
+#
+#
+# if __name__ == '__main__':
+#     main()
 
 

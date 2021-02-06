@@ -16,7 +16,7 @@ class Shouye(Base):
         # js = "document.querySelector('.menu-span').style.display='block'"
         js ="document.querySelector('.menu-span>li:nth-child(6) li').style.display='block'"
         self.js(js)
-        self.find(By.XPATH,'//*[@class="menu-span"]/li[6]/div').click()
+        self.find(By.XPATH,'//*[@class="menu-span"]/li[5]/div').click()
         sleep(5)
-        self.find(By.XPATH,'//*[@class ="menu-span"]/li[6]//li[1]').click()
+        self.find(By.XPATH,'//*[@class ="menu-span"]/li[5]//li[4]').click()
         return GongGao(self.driver)

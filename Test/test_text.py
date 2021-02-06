@@ -1,3 +1,7 @@
+
+
+
+
 #写一个二分法查找的的程序题，查找一个值再一个列表中，若再就返回true，不在就返回false
 #
 # def main(list,item):
@@ -120,8 +124,8 @@ import mock
 # print(type(b))
 
 #求X的N次方
-# y=lambda x:x*2
-# print(y(4))
+# y=lambda x,n:x**n
+# print(y(2,4))
 
 #求X的N次方
 # def main(x,n):
@@ -223,6 +227,7 @@ import mock
 #     main(4)
 # name='haha'
 # print('我的名字是：{}'.format(name))
+
 # print(f'我的名字是:{name}')
 #请求操作系统打开一个对象
 # f = open('txtfile')
@@ -444,21 +449,23 @@ import re
 #
 # if __name__ == '__main__':
 #     loop()
-#
-# set={11,22,33,44,55}
-# str ="asdfg"
-# list =[123456]
-#
-# t = list[1:3:1]
-# print(t)
-#
-# y = str[::2]
-# print(y)
+# # 切片和range()这个函数里面逻辑有点相似左包括右不包括[1:2:1],range(1,7,1),最后一个数为步数，默认不写都是1，前面2个数是都是根据索引来计算的。
+set = {11,22,33,44,55}
+st = "asdfg"
+list = [1,2,3,4,5,6]
+print(len(list))
+print(st.endswith('g'))   #endswith()返回的是一个布尔类型。
+t = list[:-1:]
+print(t)
 
-mol =lambda x:x.sort()
-L=[1, 4, 2, 3]
-print(mol(L))
-print(L)
+# y = st[::2]
+# print(y)
+#
+#
+# mol =lambda x:x.sort()
+# L=[1, 4, 2, 3]
+# print(mol(L))
+# print(L)
 #使用匿名函数输出x的y次方
 #笔记匿名函数和其他函数相比是有返回值的，不需要用命令return
 # f =lambda x,y:x**y
@@ -638,54 +645,54 @@ print(L)
 
 
 #下面就是一个带有参数的装饰器的实现过程
-def set_level(params):
-    def level(funct):
-        def set_funct(*args,**kwargs):
-            if params ==1:
-                print("权限验证1")
-            elif params == 2:
-                print("权限验证2")
-            return funct(*args,**kwargs)
-        return set_funct
-    return level
-
-
-@set_level(1)
-def test1():
-    print("这是权限验证1的用户")
-
-test1()
-
-@set_level(2)
-def test2():
-    print("这是权限验证2的用户")
-
-
-print(test2.__name__)
+# def set_level(params):
+#     def level(funct):
+#         def set_funct(*args,**kwargs):
+#             if params ==1:
+#                 print("权限验证1")
+#             elif params == 2:
+#                 print("权限验证2")
+#             return funct(*args,**kwargs)
+#         return set_funct
+#     return level
+#
+#
+# @set_level(1)
+# def test1():
+#     print("这是权限验证1的用户")
+#
+# test1()
+#
+# @set_level(2)
+# def test2():
+#     print("这是权限验证2的用户")
+#
+#
+# print(test2.__name__)
 
 #要对新来的用户设置调用函数的的权限。即实现用户1调用test1()函数执行的结果和用户2调用test1()函数执行的结果不一样。
 #设计的时候要考虑到开放封闭原则，开方即可以对方式进行扩展，封闭为不能修改函数。
 #想到了设计带有参数的装饰器。
 
-
-def set_warp(params):
-    def warp(func):
-        @wraps(func)    #@wraps(f):这个不仅仅是名字更改，注意：@wraps接受一个函数来进行装饰，并加入了复制函数名称、注释文档、参数列表等等的功能。这可以让我们在装饰器里面访问在装饰之前的函数的属性。
-        def _warp(*args, **kwargs):
-            if params>1:
-                print("我是管理员")
-            return func(*args,**kwargs)
-        return _warp
-    return warp
-
-
-@set_warp(2)
-def test3():
-    return "是我，我是管理员用户"
-
-
-print(set_warp(2).__name__)
-print(test3.__name__)   #此时输出了是名字是_warp，并不是test3。这个要怎么解决呢，就用到了functools.warps方法。我们只需要添加一下这个代码就可以了，如上
+#
+# def set_warp(params):
+#     def warp(func):
+#         @wraps(func)    #@wraps(f):这个不仅仅是名字更改，注意：@wraps接受一个函数来进行装饰，并加入了复制函数名称、注释文档、参数列表等等的功能。这可以让我们在装饰器里面访问在装饰之前的函数的属性。
+#         def _warp(*args, **kwargs):
+#             if params>1:
+#                 print("我是管理员")
+#             return func(*args,**kwargs)
+#         return _warp
+#     return warp
+#
+#
+# @set_warp(2)
+# def test3():
+#     return "是我，我是管理员用户"
+#
+#
+# print(set_warp(2).__name__)
+# print(test3.__name__)   #此时输出了是名字是_warp，并不是test3。这个要怎么解决呢，就用到了functools.warps方法。我们只需要添加一下这个代码就可以了，如上
 #笔记：
 #1.闭包，可以称之为一个特殊的函数，它与普通函数而言有一个更封闭的空间；它的书写格式是函数里面内套函数，外层函数返回的是内层函数的引用。实际执行的是内部函数代码，内层函数可以调用外层函数的数据。(这个数据可以是函数，int等等)
 #闭包的特性,与普通函数相比，它既可以传递一段程序也可以传递数据。普通函数可以说只能传递一段程序
@@ -694,29 +701,46 @@ print(test3.__name__)   #此时输出了是名字是_warp，并不是test3。这
 #装饰器就是对一个函数进行修改功能的函数，其实现原理就是闭包的原因
 
 """需求写一个通用的打印日志的装饰器"""
+#
+# def get_logger():
+#     return "你好"
+# LO=get_logger()
+#
+# def log(params):
+#     def loggit(func):
+#         @wraps(func)       #@wraps接受一个函数来进行装饰，并加入了复制函数名称、注释文档、参数列表等等的功能。这可以让我们在装饰器里面访问在装饰之前的函数的属性。
+#         def wrap(*args,**kwargs):
+#             print("当前是：{}".format(params))
+#             with open(LOG,"a") as file:
+#                 file.write(str(json.load(open("haha"))))
+#             print("当前的用户名：{}".format(args[0]))
+#             print("当前的密码是：{}".format(args[1]))
+#             return func(*args,**kwargs)
+#         return wrap
+#     return loggit
+#
+#
+# LOG = 'E:\\Ghx_Work_Project\\appium_xueqiu\\Test\\logtxt'
+# @log("登陆模块的日志")   ##调用log并且把"登陆模块的日志"当作实参进行传递；然后把返回值当作装饰器对logger进行装饰.所以我们只需要在装饰器外套一个带参数的函数，并返回装饰器的名称即可。
+# def logger(username,password):
+#     print("当前的日志为。。。。")
+#     t = open(LOG,"r")
+#     print(t.read())
+#
+#
+# print(logger("guohongxia","000111"))
+#
+# jsdlak="123 456"
+# print(jsdlak.split(" "))
+# name="你好"
+# print(f"jsdlak{name}")
+
+#接口测试自动化，于接口测试相比，自动化的用例一定是要有断言的。在写接口测试自动化时，pytest+requests，我们要考虑对requests框架进行封装,实际上我们市场上httprunner,
+# 类似于dsl，这个和数据库中的dsl是一样的？
+#利用po思想进行对接口测试用例进行封装：这个实际上和selenium UI自动化测试是一样的。
+#为什么做接口测试，接口测试的效率更高，成本比UI测试来说更低
 
 
-def log(params):
-    def loggit(func):
-        @wraps(func)       #@wraps接受一个函数来进行装饰，并加入了复制函数名称、注释文档、参数列表等等的功能。这可以让我们在装饰器里面访问在装饰之前的函数的属性。
-        def wrap(*args,**kwargs):
-            print("当前是：{}".format(params))
-            with open(LOG,"a") as file:
-                file.write("我是日志信息")
-            print("当前的用户名：{}".format(args[0]))
-            print("当前的密码是：{}".format(args[1]))
-            return func(*args,**kwargs)
-        return wrap
-    return loggit
 
 
-LOG = 'E:\\Ghx_Work_Project\\appium_xueqiu\\Test\\logtxt'
-@log("登陆模块的日志")   ##调用log并且把"登陆模块的日志"当作实参进行传递；然后把返回值当作装饰器对logger进行装饰.所以我们只需要在装饰器外套一个带参数的函数，并返回装饰器的名称即可。
-def logger(username,password):
-    print("当前的日志为。。。。")
-    t = open(LOG,"r")
-    print(t.read())
-
-
-print(logger("guohongxia","000111"))
 
