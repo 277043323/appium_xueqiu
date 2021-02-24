@@ -422,8 +422,9 @@ import json
 # #比较两个字符并把相同的提取出来,这里考虑用到正则表达式,用列表推导式来得出结论
 # b="abcdlk"
 # c="abclf"
-# # n= set(c)
+# n= set(c)
 # m=set(b)
+# n.intersection()
 # print(n.intersection(m))
 # l=n.intersection(m)
 # z =str(l)
@@ -450,13 +451,13 @@ import re
 # if __name__ == '__main__':
 #     loop()
 # # 切片和range()这个函数里面逻辑有点相似左包括右不包括[1:2:1],range(1,7,1),最后一个数为步数，默认不写都是1，前面2个数是都是根据索引来计算的。
-set = {11,22,33,44,55}
-st = "asdfg"
-list = [1,2,3,4,5,6]
-print(len(list))
-print(st.endswith('g'))   #endswith()返回的是一个布尔类型。
-t = list[:-1:]
-print(t)
+# set = {11,22,33,44,55}
+# st = "asdfg"
+# list = [1,2,3,4,5,6]
+# print(len(list))
+# print(st.endswith('g'))   #endswith()返回的是一个布尔类型。
+# t = list[:-1:]
+# print(t)
 
 # y = st[::2]
 # print(y)
@@ -740,7 +741,65 @@ print(t)
 #利用po思想进行对接口测试用例进行封装：这个实际上和selenium UI自动化测试是一样的。
 #为什么做接口测试，接口测试的效率更高，成本比UI测试来说更低
 
+# def main(t):
+#     for i in list(h):
+#         for j in range(len(i)-1):
+#             if i[j]==i[j+1]:
+#
+#                 return i
+#             else:
+#                 main(t)
+#
+#
+#         print(i)
+#
+#
+#
+#
+# t = input("请输入你的数对，并以空格分割每个数对：")
+# h = t.split(' ')
+# print(main(t))
+
+# mo=[1,2,3,4]
+# print(mo[-1])
 
 
+# # #去除相邻重复的数,
+# def quchong(S):
+#     str1=[""]
+#     for i in S:
+#         if i == str1[-1]:
+#             str1.pop()
+#         else:
+#             str1.append(i)
+#     print(''.join(str1))
+#
+#
+# quchong("aaahx")
+
+#
+# def quchong(S):
+#     str1=[""]
+#     for i in S:
+#         if i==str1[-1]:
+#             str1.pop()
+#         else:
+#             str1.append(i)
+#     print("".join(str1))
+# quchong("dddkk")
+
+
+# for z in range(0,100):
+#     for x in range(0,100):
+#         for y in range(0, 100):
+#             if x*3+y*2+0.5*z == 100 and x+y+z == 100:
+#                 print(x, y, z)
+#
+#
+# # # #乘法口诀表
+# for i in range(1,10):
+#     for j in range(1,i+1):
+#         print(str(i)+"*"+str(j)+"="+str(i*j),end=" ")
+#     print()   #这表示转行的意思
 
 

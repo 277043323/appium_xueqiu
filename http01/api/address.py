@@ -20,7 +20,3 @@ class Api(Base):
         # print(self.requ(**data01).json())
         # assert self.requ(**data01).status_code==200
 
-
-
-
-

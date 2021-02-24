@@ -36,4 +36,3 @@ class GongGao(Base):
         #这个函数没有生效，很是奇怪
         self.forward()
 
-
